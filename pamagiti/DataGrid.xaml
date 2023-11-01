@@ -9,7 +9,7 @@
         Title="Список заявок" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30pt"></RowDefinition>
+            <RowDefinition Height="20pt"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -20,12 +20,12 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Height="20pt" Grid.ColumnSpan="3" Margin="0,0,0,13">
-            <MenuItem Header="Система">
+        <Menu Height="20pt" Grid.ColumnSpan="3" Margin="0,0,0,0">
+            <MenuItem Header="Система" Height="20pt">
                 <MenuItem Header="Выйти" Click="MenuItem_Click_Exit"></MenuItem>
                 <MenuItem Header="Закрыть" Click="MenuItem_Click_Close"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Заявка">
+            <MenuItem Header="Заявка" Height="20pt">
                 <MenuItem Header="Создать заявку" Click="MenuItem_Click_Add_Query"></MenuItem>
             </MenuItem>
         </Menu>

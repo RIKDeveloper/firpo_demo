@@ -17,11 +17,17 @@ namespace pamagiti
     /// <summary>
     /// Логика взаимодействия для AddQuery.xaml
     /// </summary>
-    public partial class AddQuery : Window
+    public partial class AddQuery : CustomWindow
     {
         public AddQuery()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Click_Back(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+
         }
     }
 }

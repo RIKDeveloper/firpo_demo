@@ -54,8 +54,8 @@ namespace pamagiti
 
         private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            Login login = new Login();
+            login.Show();
             this.Close();
         }
 
@@ -68,7 +68,7 @@ namespace pamagiti
 
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
     }
 }
