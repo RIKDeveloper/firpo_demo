@@ -54,9 +54,7 @@ namespace pamagiti
 
         private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
-            this.Close();
+            Extensions.Exit_User();
         }
 
         private void MenuItem_Click_Add_Query(object sender, RoutedEventArgs e)
@@ -68,7 +66,7 @@ namespace pamagiti
 
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            Extensions.Close_App();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace pamagiti
     /// <summary>
     /// Логика взаимодействия для AddQuery.xaml
     /// </summary>
-    public partial class AddQuery : CustomWindow
+    public partial class AddQuery : Window
     {
         public AddQuery()
         {
@@ -27,7 +27,16 @@ namespace pamagiti
         private void MenuItem_Click_Back(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
 
+        private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            Extensions.Exit_User();
+        }
+
+        private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
+        {
+            Extensions.Close_App();
         }
     }
 }
