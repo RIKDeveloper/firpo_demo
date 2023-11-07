@@ -10,19 +10,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20pt"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Menu Height="20pt" Grid.ColumnSpan="3" Margin="0,0,0,0">
             <MenuItem Header="Выйти" Click="MenuItem_Click_Back"></MenuItem>
@@ -31,5 +21,21 @@
                 <MenuItem Header="Закрыть" Click="MenuItem_Click_Close"></MenuItem>
             </MenuItem>
         </Menu>
+
+        <StackPanel Grid.Row="1" CanVerticallyScroll="True">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="№" VerticalAlignment="Center" Width="100pt"/>
+                <TextBox x:Name="query_num" TextWrapping="Wrap" Text="1" Width="100pt" Height="19" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
+                <DatePicker HorizontalAlignment="Left" Width="100pt" FontSize="8pt"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Тип оборудования" FontSize="8pt" Width="100pt"/>
+                <ComboBox Width="100pt"/>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>
