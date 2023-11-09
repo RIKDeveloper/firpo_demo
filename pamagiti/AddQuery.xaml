@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pamagiti"
         mc:Ignorable="d"
-        Title="Создание заявки" Height="450" Width="800">
+        Title="Создание заявки" Height="350" Width="450">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="200pt" />
+            <Setter Property="Background" Value="#f5f5f5" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20pt"></RowDefinition>
@@ -15,7 +21,7 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Menu Height="20pt" Grid.ColumnSpan="3" Margin="0,0,0,0">
-            <MenuItem Header="Выйти" Click="MenuItem_Click_Back"></MenuItem>
+            <MenuItem Header="Назад" Click="MenuItem_Click_Back"></MenuItem>
             <MenuItem Header="Система" Height="20pt">
                 <MenuItem Header="Выйти" Click="MenuItem_Click_Exit"></MenuItem>
                 <MenuItem Header="Закрыть" Click="MenuItem_Click_Close"></MenuItem>
@@ -25,16 +31,43 @@
         <StackPanel Grid.Row="1" CanVerticallyScroll="True">
             <StackPanel Orientation="Horizontal">
                 <Label Content="№" VerticalAlignment="Center" Width="100pt"/>
-                <TextBox x:Name="query_num" TextWrapping="Wrap" Text="1" Width="100pt" Height="19" IsReadOnly="True"/>
+                <TextBox x:Name="query_num" TextWrapping="Wrap" Text="1" Width="200pt" Height="19" IsReadOnly="True" Background="#ccc"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
-                <DatePicker HorizontalAlignment="Left" Width="100pt" FontSize="8pt"/>
+                <Label Content="Клиент" FontSize="8pt" Width="100pt"/>
+                <ComboBox x:Name="clients"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Тип оборудования" FontSize="8pt" Width="100pt"/>
-                <ComboBox Width="100pt"/>
+                <ComboBox x:Name="type_device"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Тип неисправности" FontSize="8pt" Width="100pt"/>
+                <ComboBox x:Name="type_defect"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Описание проблемы" FontSize="8pt" Width="100pt"/>
+                <RichTextBox HorizontalAlignment="Left" Width="200pt" FontSize="8pt" Height="40pt" x:Name="decripion">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
+                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_create" IsTodayHighlighted="True"/>
+            </StackPanel>
+            <StackPanel x:Name="executor_block" Orientation="Horizontal">
+                <Label Content="Исполнитель" FontSize="8pt" Width="100pt"/>
+                <ComboBox x:Name="executor"/>
+            </StackPanel>
+            <StackPanel x:Name="date_finish_block" Orientation="Horizontal">
+                <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
+                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_finish" IsTodayHighlighted="True"/>
+            </StackPanel>
+            <Button Width="100pt" HorizontalAlignment="center" Height="20pt" Margin="0,20,0,0" Name="save">Сохранить</Button>
         </StackPanel>
 
     </Grid>

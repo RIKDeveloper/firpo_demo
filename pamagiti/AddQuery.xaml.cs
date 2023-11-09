@@ -19,9 +19,21 @@ namespace pamagiti
     /// </summary>
     public partial class AddQuery : Window
     {
-        public AddQuery()
+        public AddQuery(string type)
         {
             InitializeComponent();
+            switch (type)
+            {
+                case "add":
+                    date_create.SelectedDate = DateTime.Now;
+                    date_create.IsEnabled = false;
+                    executor_block.Visibility = Visibility.Collapsed;
+                    date_finish_block.Visibility = Visibility.Collapsed;
+                    break;
+                case "change":
+                    save.Content = "Применить";
+                    break;
+            }
         }
 
         private void MenuItem_Click_Back(object sender, RoutedEventArgs e)

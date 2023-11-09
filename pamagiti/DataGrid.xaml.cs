@@ -22,8 +22,8 @@ namespace pamagiti
     {
         private class Status
         {
-            public int StatusId { get; set; }
-            public string StatusName { get; set; }
+            public int Value { get; set; }
+            public string Name { get; set; }
 
         }
         
@@ -47,7 +47,7 @@ namespace pamagiti
             InitializeComponent();
             List<Query> queryList = new List<Query>
             {
-                new Query { Id=1, Title="Машинка Брауни", CustomerId=1, Customer="ООО Печатные машинки", ExecutorId=1, Executor="ООО Бездельники", Desc="Описание заявки", Status=new Status { StatusId=1, StatusName="Новое" }, Date="10.10.23", StatusSource=new Status[] { new Status { StatusId=1, StatusName="Новое" } } },
+                new Query { Id=1, Title="Печатная машинка Брауни", CustomerId=1, Customer="ООО Печатные машинки", ExecutorId=1, Executor="ООО Ремонт Печати", Desc="Описание заявки", Status=new Status { Value=1, Name="Новое" }, Date="10.10.23", StatusSource=new Status[] { new Status { Value=1, Name="Новое" } } },
             };
             queryGrid.ItemsSource = queryList;
         }
@@ -59,7 +59,7 @@ namespace pamagiti
 
         private void MenuItem_Click_Add_Query(object sender, RoutedEventArgs e)
         {
-            AddQuery addQuery = new AddQuery();
+            AddQuery addQuery = new AddQuery("add");
             addQuery.Owner = this;
             addQuery.Show();
         }
@@ -67,6 +67,11 @@ namespace pamagiti
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
         {
             Extensions.Close_App();
+        }
+
+        private void queryGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

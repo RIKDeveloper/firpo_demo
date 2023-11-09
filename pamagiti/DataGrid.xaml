@@ -29,7 +29,7 @@
                 <MenuItem Header="Создать заявку" Click="MenuItem_Click_Add_Query"></MenuItem>
             </MenuItem>
         </Menu>
-        <DataGrid Grid.Row="1" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False" SelectionChanged="queryGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№" Binding="{Binding Path=Id}" />
                 <DataGridTextColumn Header="Заявка" Binding="{Binding Path=Title}" />
