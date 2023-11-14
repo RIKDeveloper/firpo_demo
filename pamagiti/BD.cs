@@ -67,7 +67,7 @@ namespace pamagiti
 
     public static class BD
     {
-        private static string connectionString = "Server=(localdb)\\mssqllocaldb;Database=master;Trusted_Connection=True;";
+        private static string connectionString = "Data Source=KIKRDEV-COMP\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;";
 
         private static SqlConnection connection = null;
         public static async void Create_Connection(MenuItem sender)
@@ -139,7 +139,7 @@ namespace pamagiti
         public static User Login_User(string username, string password)
         {
             User user = new User();
-            Dictionary<string, object> userDict = Get($"select * from dbo.user where login='{username}' and password='{SHA256.Create(password)}'")[0];
+            Dictionary<string, object> userDict = Get($"select * from dbo.[user] where login='{username}' and password='{SHA256.Create(password)}'")[0];
             user.Login = username;
             user.Password = password;
             user.Phone = (string)userDict["phone"];
@@ -179,7 +179,7 @@ namespace pamagiti
 
         public static void Set_User(User user)
         {
-            Set($"INSERT INTO dbo.user value ({user.Name}, {user.Surname}, {user.Patronomic}, {user.Role.Id}, {user.Phone}, {user.Email}, {user.Login}, {SHA256.Create(user.Password)})");
+            Set($"INSERT INTO dbo.[user] value ({user.Name}, {user.Surname}, {user.Patronomic}, {user.Role.Id}, {user.Phone}, {user.Email}, {user.Login}, {SHA256.Create(user.Password)})");
         }
 
         public static List<Query> Get_Queries(User user)
