@@ -23,11 +23,14 @@ namespace pamagiti
         public Login()
         {
             InitializeComponent();
+
+            login.Text = "1";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DataGrid dataGrid = new DataGrid();
+            int role = int.Parse(login.Text);
+            DataGrid dataGrid = new DataGrid(role);
             dataGrid.Show();
             this.Close();
         }

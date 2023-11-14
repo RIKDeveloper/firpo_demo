@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pamagiti"
         mc:Ignorable="d"
-        Title="Создание заявки" Height="350" Width="450">
+        Title="Создание заявки" Width="450" Height="320">
     <Window.Resources>
         <Style TargetType="ComboBox">
             <Setter Property="Width" Value="200pt" />
@@ -33,9 +33,13 @@
                 <Label Content="№" VerticalAlignment="Center" Width="100pt"/>
                 <TextBox x:Name="query_num" TextWrapping="Wrap" Text="1" Width="200pt" Height="19" IsReadOnly="True" Background="#ccc"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel x:Name="status_block" Orientation="Horizontal" Visibility="Collapsed">
+                <Label Content="Статус" FontSize="8pt" Width="100pt"/>
+                <ComboBox x:Name="status" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel x:Name="client_block" Orientation="Horizontal">
                 <Label Content="Клиент" FontSize="8pt" Width="100pt"/>
-                <ComboBox x:Name="clients"/>
+                <ComboBox x:Name="clients" IsReadOnly="True"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Тип оборудования" FontSize="8pt" Width="100pt"/>
@@ -57,18 +61,27 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
-                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_create" IsTodayHighlighted="True"/>
+                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_create" IsTodayHighlighted="True" IsEnabled="False"/>
             </StackPanel>
-            <StackPanel x:Name="executor_block" Orientation="Horizontal">
+            <StackPanel x:Name="executor_block" Orientation="Horizontal" Visibility="Collapsed">
                 <Label Content="Исполнитель" FontSize="8pt" Width="100pt"/>
                 <ComboBox x:Name="executor"/>
             </StackPanel>
-            <StackPanel x:Name="date_finish_block" Orientation="Horizontal">
-                <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
-                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_finish" IsTodayHighlighted="True"/>
+            <StackPanel x:Name="date_finish_block" Orientation="Horizontal" Visibility="Collapsed">
+                <Label Content="Дата выполнения заявки" FontSize="8pt" Width="100pt"/>
+                <DatePicker HorizontalAlignment="Left" Width="200pt" FontSize="8pt" x:Name="date_finish" IsEnabled="False" IsTodayHighlighted="True"/>
             </StackPanel>
-            <Button Width="100pt" HorizontalAlignment="center" Height="20pt" Margin="0,20,0,0" Name="save">Сохранить</Button>
+            <StackPanel x:Name="comment_block" Orientation="Horizontal" Visibility="Collapsed">
+                <Label Content="Комментарий" FontSize="8pt" Width="100pt"/>
+                <RichTextBox HorizontalAlignment="Left" IsReadOnly="True" Width="200pt" FontSize="8pt" Height="40pt" x:Name="comment">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>
+            </StackPanel>
+            <Button Width="100pt" HorizontalAlignment="center" Height="20pt" Margin="0,20,0,20" Name="save">Создать</Button>
         </StackPanel>
-
     </Grid>
 </Window>

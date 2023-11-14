@@ -10,7 +10,7 @@ using System.ComponentModel;
 namespace pamagiti
 {
     public static class Extensions
-    {
+    { 
        
         public static void Exit_User()
         {

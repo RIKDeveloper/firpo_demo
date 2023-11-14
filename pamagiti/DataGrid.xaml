@@ -28,6 +28,8 @@
             <MenuItem Header="Заявка" Height="20pt">
                 <MenuItem Header="Создать заявку" Click="MenuItem_Click_Add_Query"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Заявка" Height="20pt" x:Name="mc">
+            </MenuItem>
         </Menu>
         <DataGrid Grid.Row="1" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False" SelectionChanged="queryGrid_SelectionChanged">
             <DataGrid.Columns>
