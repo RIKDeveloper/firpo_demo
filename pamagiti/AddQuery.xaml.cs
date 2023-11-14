@@ -19,10 +19,15 @@ namespace pamagiti
     /// </summary>
     public partial class AddQuery : Window
     {
-        public AddQuery(string type, int role)
+
+        private User user { get; set; }
+        private string type { get; set; }
+        public AddQuery(string type, User user)
         {
             InitializeComponent();
-            switch (type)
+            this.user = user;
+            this.type = type;
+            switch (this.type)
             {
                 case "add":
                     date_create.SelectedDate = DateTime.Now;
@@ -33,7 +38,7 @@ namespace pamagiti
                     executor_block.Visibility = Visibility.Visible;
                     date_finish_block.Visibility = Visibility.Visible;
                     comment_block.Visibility = Visibility.Visible;
-                    if (role == 1)
+                    if (this.user.Id == 1)
                     {
                         date_finish.SelectedDate = DateTime.Now;
                         status.IsReadOnly = false;

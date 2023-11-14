@@ -13,7 +13,7 @@
         <Label Content="Логин" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Width="120" Height="30" Grid.Row="1"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="247" Grid.Row="1" Height="25" x:Name="login"/>
         <Label Content="Пароль" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Height="26" Grid.Row="2" Width="127"/>
-        <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="0,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="247" Height="25"/>
+        <PasswordBox x:Name="password" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="0,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="247" Height="25"/>
         <Button Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Grid.Column="1" Grid.Row="3" Click="Button_Click"/>
 
 

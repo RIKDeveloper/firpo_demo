@@ -21,17 +21,14 @@ namespace pamagiti
     public partial class DataGrid : Window
     {
 
-        private int role { get; set; }
+        private User user { get; set; }
 
-        public DataGrid(int role)
+        public DataGrid(User user)
         {
             InitializeComponent();
-            List<Query> queryList = new List<Query>
-            {
-                new Query { Id=1, Title="Печатная машинка Брауни", CustomerId=1, Customer="ООО Печатные машинки", ExecutorId=1, Executor="ООО Ремонт Печати", Desc="Описание заявки", Status=new Status { Value=1, Name="Новое" }, Date="10.10.23", StatusSource=new Status[] { new Status { Value=1, Name="Новое" } } },
-            };
+            List<Query> queryList = BD.Get_Queries(user);
             queryGrid.ItemsSource = queryList;
-            this.role = role;
+            this.user = user;
             BD.Create_Connection(mc);
         }
 
@@ -42,7 +39,7 @@ namespace pamagiti
 
         private void MenuItem_Click_Add_Query(object sender, RoutedEventArgs e)
         {
-            AddQuery addQuery = new AddQuery("add", role);
+            AddQuery addQuery = new AddQuery("add", user);
             addQuery.Owner = this;
             addQuery.Show();
         }

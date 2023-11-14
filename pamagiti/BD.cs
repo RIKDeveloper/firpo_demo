@@ -41,8 +41,8 @@ namespace pamagiti
     public class Query
     {
         public int Id { get; set; }
-        public Device device { get; set; }
-        public Defect defect { get; set; }
+        public Device Device { get; set; }
+        public Defect Defect { get; set; }
         public string Desc { get; set; }
         public User Client { get; set; }
         public User Executor { get; set; }
@@ -96,30 +96,6 @@ namespace pamagiti
             }
             Console.WriteLine("Программа завершила работу.");
             Console.Read();
-        }
-
-        public static List<Query> Get_Queries()
-        {
-            List<Query> queries = new List<Query>();
-            string sqlExpression = "select * from dbo.query";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                SqlCommand command = new SqlCommand(sqlExpression, connection);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        object id = reader["id"];
-                        object name = reader["name"];
-                        object age = reader["age"];
-                        Console.WriteLine($"{id} \t{name} \t{age}");
-                    }
-                }
-            }
-
-            return queries;
         }
 
         public static List<Dictionary<string, object>> Get(string sqlExpression)
@@ -178,10 +154,67 @@ namespace pamagiti
             return user;
         }
 
+        public static List<User> Get_Users()
+        {
+            List<User> users = new List<User>();   
+            List <Dictionary<string, object>> userDictList = Get($"select *, r.id r_id, r.name r_name from dbo.[user] u join dbo.role r on u.role_id=r.id");
+            for (int i = 0; i < userDictList.Count; i++)
+            {
+                Dictionary<string, object> userDict = userDictList[i];
+                User user = new User();
+                user.Login = (string)userDict["login"];
+                user.Password = (string)userDict["password"];
+                user.Phone = (string)userDict["phone"];
+                user.Surname = (string)userDict["surname"];
+                user.Email = (string)userDict["email"];
+                user.Patronomic = (string)userDict["patronomic"];
+                user.Name = (string)userDict["name"];
+                user.Role = new Role();
+                user.Role.Id = (int)userDict["r_id"];
+                user.Role.Name = (string)userDict["r_name"];
+                users.Add(user);    
+            }
+            return users;
+        }
+
         public static void Set_User(User user)
         {
-            Set($"INSERT INTO dbo.user value ({user.Name})");
+            Set($"INSERT INTO dbo.user value ({user.Name}, {user.Surname}, {user.Patronomic}, {user.Role.Id}, {user.Phone}, {user.Email}, {user.Login}, {SHA256.Create(user.Password)})");
         }
-        
+
+        public static List<Query> Get_Queries(User user)
+        {
+            List<Query> queries = new List<Query>();
+            List<Dictionary<string, object>> queriesDictList = Get($"select q.*, def.id def_id, def.name def_name, dev.id dev_id, dev.name dev_name, e.id e_id, e.name e_name, e.surname e_surname, c.id c_id, c.name c_name, c.surname c_surname, s.id s_id, s.name s_name from dbo.query q join dbo.defect def on q.defect_id=def.id join dbo.device dev on q.device_id=dev.id join dbo.[user] e on q.executor_id=e.id join dbo.[user] c on q.client_id=c.id join dbo.[status] s on q.status_id=s.id");
+            for (int i = 0; i < queriesDictList.Count; i++)
+            {
+                Query q = new Query();
+                q.Executor = new User();
+                q.Executor.Id = (int)queriesDictList[i]["e_id"];
+                q.Executor.Name = (string)queriesDictList[i]["e_name"];
+                q.Executor.Surname = (string)queriesDictList[i]["e_surname"];
+                q.Client = new User();
+                q.Client.Id = (int)queriesDictList[i]["c_id"];
+                q.Client.Name = (string)queriesDictList[i]["c_name"];
+                q.Client.Surname = (string)queriesDictList[i]["c_surname"];
+                q.Defect = new Defect();
+                q.Defect.Id = (int)queriesDictList[i]["def_id"];
+                q.Defect.Name = (string)queriesDictList[i]["def_name"];
+                q.Device = new Device();
+                q.Device.Id = (int)queriesDictList[i]["dev_id"];
+                q.Device.Name = (string)queriesDictList[i]["dev_name"];
+                q.Comment = (string)queriesDictList[i]["comment"];
+                q.Desc = (string)queriesDictList[i]["description"];
+                q.DateFinish = (DateTime)queriesDictList[i]["date_finish"];
+                q.DateStart = (DateTime)queriesDictList[i]["date_start"];
+                q.Status = new Status();
+                q.Status.Id = (int)queriesDictList[i]["s_id"];
+                q.Status.Name = (string)queriesDictList[i]["s_name"];
+
+                queries.Add(q);
+            }
+
+            return queries;
+        }
     }
 }
