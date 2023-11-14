@@ -67,7 +67,7 @@ namespace pamagiti
 
     public static class BD
     {
-        private static string connectionString = "Data Source=KIKRDEV-COMP\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;";
+        private static string connectionString = "Server=KIKRDEV-COMP\\SQLEXPRESS;Initial Catalog=data;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;";
 
         private static SqlConnection connection = null;
         public static async void Create_Connection(MenuItem sender)
@@ -139,18 +139,23 @@ namespace pamagiti
         public static User Login_User(string username, string password)
         {
             User user = new User();
-            Dictionary<string, object> userDict = Get($"select * from dbo.[user] where login='{username}' and password='{SHA256.Create(password)}'")[0];
-            user.Login = username;
-            user.Password = password;
-            user.Phone = (string)userDict["phone"];
-            user.Surname = (string)userDict["surname"];
-            user.Email = (string)userDict["email"];
-            user.Patronomic = (string)userDict["patronomic"];
-            user.Name = (string)userDict["name"];
-            user.Role = new Role();
-            Dictionary<string, object> role = Get($"select * from dbo.role where id={(string)userDict["role_id"]}")[0];
-            user.Role.Id = (int)userDict["role_id"];
-            user.Role.Name = (string)role["name"];
+            List<Dictionary<string, object>> userDictList = Get($"select * from dbo.[user] where login='{username}' and password='{SHA256.Create(password)}'");
+            if (userDictList.Count > 0)
+            {
+                Dictionary<string, object> userDict = userDictList[0];
+                user.Login = username;
+                user.Password = password;
+                user.Phone = (string)userDict["phone"];
+                user.Surname = (string)userDict["surname"];
+                user.Email = (string)userDict["email"];
+                user.Patronomic = (string)userDict["patronomic"];
+                user.Name = (string)userDict["name"];
+                user.Role = new Role();
+                Dictionary<string, object> role = Get($"select * from dbo.role where id={(string)userDict["role_id"]}")[0];
+                user.Role.Id = (int)userDict["role_id"];
+                user.Role.Name = (string)role["name"];
+            }
+            
             return user;
         }
 
