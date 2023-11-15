@@ -28,18 +28,17 @@
             <MenuItem Header="Заявка" Height="20pt">
                 <MenuItem Header="Создать заявку" Click="MenuItem_Click_Add_Query"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Заявка" Height="20pt" x:Name="mc">
-            </MenuItem>
         </Menu>
         <DataGrid Grid.Row="1" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False" SelectionChanged="queryGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="№" Binding="{Binding Path=Id}" />
-                <DataGridTextColumn Header="Заявка" Binding="{Binding Path=Title}" />
+                <DataGridTextColumn Header="№ Заявки" Binding="{Binding Path=Id}" />
+                <DataGridTextColumn Header="Устройство" Binding="{Binding Path=Device.Name}"/>
+                <DataGridTextColumn Header="Дефект" Binding="{Binding Path=Defect.Name}"/>
                 <DataGridTextColumn Header="Описание" Binding="{Binding Path=Desc}"/>
-                <DataGridTextColumn Header="Заказчик" Binding="{Binding Path=Customer}" />
-                <DataGridTextColumn Header="Исполнитель" Binding="{Binding Path=Executor}" />
-                <DataGridComboBoxColumn ItemsSource="{Binding Source=StatusSource}" Header="Статус" SelectedItemBinding="{Binding Path=Status}" DisplayMemberPath="StatusName" SelectedValuePath="StatusId"/>
-                <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=Date}" />
+                <DataGridTextColumn Header="Заказчик" Binding="{Binding Path=Client.Name}" />
+                <DataGridTextColumn Header="Исполнитель" Binding="{Binding Path=Executor.Name}" />
+                <DataGridTextColumn Header="Статус" Binding="{Binding Path=Status.Name}" />
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=DateStart}" />
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>

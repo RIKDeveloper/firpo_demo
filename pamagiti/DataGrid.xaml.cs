@@ -27,6 +27,21 @@ namespace pamagiti
         {
             InitializeComponent();
             List<Query> queryList = BD.Get_Queries(user);
+            Query q = new Query();
+            q.Defect = new Defect();
+            q.Defect.Name = "Залипает клавиша";
+            q.Device = new Device();
+            q.Device.Name = "Печатная машинка";
+            q.Desc = "Залипает клавиша W";
+            q.Id = 1;
+            q.DateStart = new DateTime(2023, 11, 12);
+            q.Client = new User();
+            q.Client.Name = "Василий";
+            q.Executor = new User();
+            q.Executor.Name = "Федор";
+            q.Status = new Status();
+            q.Status.Name = "Новое";
+            queryList.Add(q);
             queryGrid.ItemsSource = queryList;
             this.user = user;
         }

@@ -121,7 +121,8 @@ namespace pamagiti
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
-                command.ExecuteNonQuery();
+                int a = command.ExecuteNonQuery();
+                Console.WriteLine(a);
             }
         }
 
