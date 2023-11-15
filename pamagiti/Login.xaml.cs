@@ -23,7 +23,7 @@ namespace pamagiti
         public Login()
         {
             InitializeComponent();
-
+            BD.Check_Connection(this);
             login.Text = "1";
         }
 

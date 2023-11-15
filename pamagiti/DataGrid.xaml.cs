@@ -29,7 +29,6 @@ namespace pamagiti
             List<Query> queryList = BD.Get_Queries(user);
             queryGrid.ItemsSource = queryList;
             this.user = user;
-            BD.Create_Connection(mc);
         }
 
         private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)

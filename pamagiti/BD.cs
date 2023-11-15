@@ -67,35 +67,24 @@ namespace pamagiti
 
     public static class BD
     {
-        private static string connectionString = "Server=KIKRDEV-COMP\\SQLEXPRESS;Initial Catalog=data;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;";
-
-        private static SqlConnection connection = null;
-        public static async void Create_Connection(MenuItem sender)
+        private static string connectionString = "Server=KIKRDEV-COMP\\SQLEXPRESS;Initial Catalog=data;Integrated Security=True;Connect Timeout=1;Encrypt=False;Trust Server Certificate=False;";
+        public async static void Check_Connection(Login login)
         {
-            connection = new SqlConnection(connectionString);
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Открываем подключение
-                await connection.OpenAsync();
-                Console.WriteLine("Подключение открыто");
-                sender.Header = "Подключение открыто";
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                // если подключение открыто
-                if (connection.State == ConnectionState.Open)
+                try
                 {
-                    // закрываем подключение
-                    await connection.CloseAsync();
-                    Console.WriteLine("Подключение закрыто...");
+                    await connection.OpenAsync();
+                    SqlCommand command = new SqlCommand("SELECT 1", connection);
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (SqlException e)
+                {
+                    ErrorView ev = new ErrorView(e.Message);
+                    ev.Show();
+                    login.Close();
                 }
             }
-            Console.WriteLine("Программа завершила работу.");
-            Console.Read();
         }
 
         public static List<Dictionary<string, object>> Get(string sqlExpression)
