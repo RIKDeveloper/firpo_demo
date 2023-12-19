@@ -141,7 +141,7 @@ namespace pamagiti
                 user.Patronomic = (string)userDict["patronomic"];
                 user.Name = (string)userDict["name"];
                 user.Role = new Role();
-                Dictionary<string, object> role = Get($"select * from dbo.role where id={(string)userDict["role_id"]}")[0];
+                Dictionary<string, object> role = Get($"select * from dbo.[role] where id='{userDict["role_id"]}'")[0];
                 user.Role.Id = (int)userDict["role_id"];
                 user.Role.Name = (string)role["name"];
             }
@@ -174,7 +174,7 @@ namespace pamagiti
 
         public static void Set_User(User user)
         {
-            Set($"INSERT INTO dbo.[user] value ({user.Name}, {user.Surname}, {user.Patronomic}, {user.Role.Id}, {user.Phone}, {user.Email}, {user.Login}, {SHA256.Create(user.Password)})");
+            Set($"INSERT INTO dbo.[user] values ('{user.Name}', '{user.Surname}', '{user.Patronomic}', '{user.Role.Id}', '{user.Phone}', '{user.Email}', '{user.Login}', '{SHA256.Create(user.Password)}')");
         }
 
         public static List<Query> Get_Queries(User user)
@@ -198,9 +198,11 @@ namespace pamagiti
                 q.Device = new Device();
                 q.Device.Id = (int)queriesDictList[i]["dev_id"];
                 q.Device.Name = (string)queriesDictList[i]["dev_name"];
-                q.Comment = (string)queriesDictList[i]["comment"];
+                if (queriesDictList[i]["comment"] is not DBNull)
+                    q.Comment = (string)queriesDictList[i]["comment"];
                 q.Desc = (string)queriesDictList[i]["description"];
-                q.DateFinish = (DateTime)queriesDictList[i]["date_finish"];
+                if (queriesDictList[i]["date_finish"] is not DBNull)
+                    q.DateFinish = (DateTime)queriesDictList[i]["date_finish"];
                 q.DateStart = (DateTime)queriesDictList[i]["date_start"];
                 q.Status = new Status();
                 q.Status.Id = (int)queriesDictList[i]["s_id"];
@@ -211,5 +213,7 @@ namespace pamagiti
 
             return queries;
         }
+
+        public 
     }
 }

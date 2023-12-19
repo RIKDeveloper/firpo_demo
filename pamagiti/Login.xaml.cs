@@ -29,7 +29,6 @@ namespace pamagiti
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int role = int.Parse(login.Text);
             User user = BD.Login_User(login.Text, password.Password);
             List<User> users = BD.Get_Users();
             if (users.Count < 0 )
@@ -45,7 +44,7 @@ namespace pamagiti
                 user.Password = "pamagiti";
                 BD.Set_User(user);
             }
-            if (user != null)
+            if (user.Login != null)
             {
                 DataGrid dataGrid = new DataGrid(user);
                 dataGrid.Show();

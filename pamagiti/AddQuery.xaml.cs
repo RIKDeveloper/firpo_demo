@@ -31,6 +31,7 @@ namespace pamagiti
             {
                 case "add":
                     date_create.SelectedDate = DateTime.Now;
+
                     break;
                 case "change":
                     save.Content = "Применить";
