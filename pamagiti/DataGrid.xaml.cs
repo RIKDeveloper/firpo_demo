@@ -20,15 +20,19 @@ namespace pamagiti
     /// </summary>
     public partial class DataGrid : Window
     {
-
         private User user { get; set; }
-
+        private List<Query> queries {  get; set; }
         public DataGrid(User user)
         {
             InitializeComponent();
             List<Query> queryList = BD.Get_Queries(user);
+            this.queries = queryList;
             queryGrid.ItemsSource = queryList;
             this.user = user;
+            if (user.Role.Id == 3 || user.Role.Id == 4)
+            {
+                addUser.Visibility = Visibility.Visible;
+            }
         }
 
         private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
@@ -38,9 +42,12 @@ namespace pamagiti
 
         private void MenuItem_Click_Add_Query(object sender, RoutedEventArgs e)
         {
-            AddQuery addQuery = new AddQuery("add", user);
+            AddQuery addQuery = new AddQuery("add", user, null);
             addQuery.Owner = this;
-            addQuery.Show();
+            addQuery.ShowDialog();
+            List<Query> queryList = BD.Get_Queries(user);
+            this.queries = queryList;
+            queryGrid.ItemsSource = queryList;
         }
 
         private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
@@ -50,7 +57,32 @@ namespace pamagiti
 
         private void queryGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (user.Role.Id == 0)
+            {
+                MessageBox.Show("Нет прав для измения заявки.");
+            } else
+            {
+                Query q = queryGrid.SelectedItem as Query;
+                AddQuery addQuery = new AddQuery("change", user, q);
+                addQuery.Owner = this;
+                addQuery.ShowDialog();
+                List<Query> queryList = BD.Get_Queries(user);
+                this.queries = queryList;
+                queryGrid.ItemsSource = queryList;
+            }
+            
+        }
+
+        private void addUser_Click(object sender, RoutedEventArgs e)
+        {
+            AddUser addUser = new AddUser();
+            addUser.Owner = this;
+            addUser.ShowDialog();
         }
     }
 }

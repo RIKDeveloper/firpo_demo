@@ -31,7 +31,7 @@
         <StackPanel Grid.Row="1" CanVerticallyScroll="True">
             <StackPanel Orientation="Horizontal">
                 <Label Content="№" VerticalAlignment="Center" Width="100pt"/>
-                <TextBox x:Name="query_num" TextWrapping="Wrap" Text="1" Width="200pt" Height="19" IsReadOnly="True" Background="#ccc"/>
+                <TextBox x:Name="query_num" Text="1" Width="200pt" Height="19" IsReadOnly="True" Background="#ccc"/>
             </StackPanel>
             <StackPanel x:Name="status_block" Orientation="Horizontal" Visibility="Collapsed">
                 <Label Content="Статус" FontSize="8pt" Width="100pt"/>
@@ -51,13 +51,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Описание проблемы" FontSize="8pt" Width="100pt"/>
-                <RichTextBox HorizontalAlignment="Left" Width="200pt" FontSize="8pt" Height="40pt" x:Name="decripion">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>
+                <TextBox x:Name="decription" Width="200pt" TextWrapping="Wrap" Height="40pt"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Дата создания заявки" FontSize="8pt" Width="100pt"/>
@@ -73,15 +67,10 @@
             </StackPanel>
             <StackPanel x:Name="comment_block" Orientation="Horizontal" Visibility="Collapsed">
                 <Label Content="Комментарий" FontSize="8pt" Width="100pt"/>
-                <RichTextBox HorizontalAlignment="Left" IsReadOnly="True" Width="200pt" FontSize="8pt" Height="40pt" x:Name="comment">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>
+                <TextBox TextWrapping="Wrap" IsReadOnly="True" Width="200pt" FontSize="8pt" Height="40pt" x:Name="comment">
+                </TextBox>
             </StackPanel>
-            <Button Width="100pt" HorizontalAlignment="center" Height="20pt" Margin="0,20,0,20" Name="save">Создать</Button>
+            <Button Click="save_Click"  Width="100pt" HorizontalAlignment="center" Height="20pt" Margin="0,20,0,20" Name="save">Создать</Button>
         </StackPanel>
     </Grid>
 </Window>

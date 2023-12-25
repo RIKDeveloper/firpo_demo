@@ -28,8 +28,9 @@
             <MenuItem Header="Заявка" Height="20pt">
                 <MenuItem Header="Создать заявку" Click="MenuItem_Click_Add_Query"></MenuItem>
             </MenuItem>
+            <MenuItem x:Name="addUser" Click="addUser_Click" Header="Добавить пользователя" Visibility="Collapsed"></MenuItem>
         </Menu>
-        <DataGrid Grid.Row="1" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False" SelectionChanged="queryGrid_SelectionChanged">
+        <DataGrid Grid.Row="1" IsReadOnly="True" x:Name="queryGrid" CanUserAddRows="False" Grid.ColumnSpan="3" Grid.RowSpan="4" AutoGenerateColumns="False" SelectionChanged="queryGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№ Заявки" Binding="{Binding Path=Id}" />
                 <DataGridTextColumn Header="Устройство" Binding="{Binding Path=Device.Name}"/>
@@ -43,9 +44,7 @@
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Height="30pt">
-                        <Button Tag="{Binding Path=Id}"  Content="Просмотреть заявку" Margin="5,5pt,5,5pt" Height="20pt"/>
-                        <Button Tag="{Binding Path=CustomerId}" Content="Просмотреть заказчика" Margin="5,5pt,5,5pt" Height="20pt"/>
-                        <Button Tag="{Binding Path=ExecutorId}" Content="Просмотреть исполнителя" Margin="5,5pt,5,5pt" Height="20pt"/>
+                        <Button Tag="{Binding Path=Id}" x:Name="queryBtn" Click="Button_Click" Content="Изменить заявку" Margin="5,5pt,5,5pt" Height="20pt"/>
                     </StackPanel>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
